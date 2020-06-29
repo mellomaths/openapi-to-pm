@@ -1,0 +1,381 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Delivery Zones",
+    "version": "1.0.0",
+    "description": "Consulta de Delivery Zones cadastradas no SAP."
+  },
+  "servers": [
+    {
+      "url": "https://api-supergasbras.sensedia.com/sb/deliveryzones/v1",
+      "description": "Sandbox"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/dev/deliveryzones/v1",
+      "description": "Desenvolvimento"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/hml/deliveryzones/v1",
+      "description": "Homologação"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/deliveryzones/v1",
+      "description": "Produção"
+    }
+  ],
+  "paths": {
+    "/deliveryzones": {
+      "get": {
+        "description": "Retorna a lista de Delivery Zones cadastradas no SAP.",
+        "tags": [
+          "Delivery Zones"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/client_id"
+          },
+          {
+            "$ref": "#/components/parameters/access_token"
+          },
+          {
+            "in": "query",
+            "name": "uf",
+            "required": false,
+            "description": "UF da delivery zone.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "municipio",
+            "required": false,
+            "description": "municipio da delivery zone.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "_offset",
+            "description": "Índice inicial (maior ou igual a zero).",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          {
+            "in": "query",
+            "name": "_limit",
+            "description": "Quantidade de registros (maior ou igual a um e no máximo 100).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedido retornado.",
+            "headers": {
+              "total": {
+                "$ref": "#/components/headers/total"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deliveryzones"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Solicitação incorreta.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Requisição não autorizada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Acesso negado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao processar a solicitação no servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Servidor encontrou um erro e não pode completar a solicitação.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Não foi possível completar a solicitação.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deliveryzones/{id}": {
+      "get": {
+        "description": "Recuperação de uma delivery zone.",
+        "tags": [
+          "Delivery Zones"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/client_id"
+          },
+          {
+            "$ref": "#/components/parameters/access_token"
+          },
+          {
+            "in": "path",
+            "required": true,
+            "name": "id",
+            "description": "identificador da zona de entrega.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedido retornado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deliveryzones"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Solicitação incorreta.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Requisição não autorizada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Acesso negado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Recurso não encontrado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao processar a solicitação no servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Servidor encontrou um erro e não pode completar a solicitação.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Não foi possível completar a solicitação.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "headers": {
+      "total": {
+        "description": "Quantidade total de registros na base.",
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "parameters": {
+      "uf": {
+        "name": "uf",
+        "in": "header",
+        "required": false,
+        "description": "UF da delivery zone.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "municipio": {
+        "name": "municipio",
+        "in": "header",
+        "required": false,
+        "description": "Municipio da delivery zone.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "client_id": {
+        "in": "header",
+        "name": "client_id",
+        "description": "Identificador do App cadastrado no portal.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "access_token": {
+        "in": "header",
+        "name": "access_token",
+        "description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "deliveryzones": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/deliveryzone"
+        }
+      },
+      "deliveryzone": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "centro": {
+            "type": "string"
+          },
+          "uf": {
+            "type": "string"
+          },
+          "municipio": {
+            "type": "string"
+          },
+          "periodicidade": {
+            "type": "string"
+          },
+          "domingo": {
+            "type": "boolean"
+          },
+          "sabado": {
+            "type": "boolean"
+          },
+          "sextafeira": {
+            "type": "boolean"
+          },
+          "quintafeira": {
+            "type": "boolean"
+          },
+          "quartafeira": {
+            "type": "boolean"
+          },
+          "tercafeira": {
+            "type": "boolean"
+          },
+          "segundafeira": {
+            "type": "boolean"
+          }
+        }
+      },
+      "erro": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "integer",
+            "description": "Código detalhado do erro."
+          },
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem detalhada do erro."
+          }
+        }
+      }
+    }
+  }
+}

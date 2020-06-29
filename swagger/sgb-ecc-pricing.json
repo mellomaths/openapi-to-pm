@@ -1,0 +1,838 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API ECC Pricing",
+    "description": "API de precificação para clientes Supergasbras.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api-supergasbras.sensedia.com/sb/ecc/pricing/v1",
+      "description": "Sandbox"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/dev/ecc/pricing/v1",
+      "description": "Desenvolvimento"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/hml/ecc/pricing/v1",
+      "description": "Homologação"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/ecc/pricing/v1",
+      "description": "Produção"
+    }
+  ],
+  "paths": {
+    "/pricing/descontos": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/client_id"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Descontos"
+        ],
+        "summary": "Realiza o registro de um desconto.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/_registroDesconto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/CreatedWithoutBody"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Descontos"
+        ],
+        "summary": "Atualiza as informações de um desconto.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/_atualizacaoDesconto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OkWithoutBody"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          }
+        }
+      }
+    },
+    "/pricing/precos": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/client_id"
+          },
+          {
+            "$ref": "#/components/parameters/access_token"
+          }
+        ],
+        "tags": [
+          "Preços"
+        ],
+        "summary": "Realiza o registro de um preço.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/_registroPreco"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/CreatedWithoutBody"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Preços"
+        ],
+        "summary": "Obter lista de preços do cliente.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/client_id"
+          },
+          {
+            "$ref": "#/components/parameters/access_token"
+          },
+          {
+            "in": "query",
+            "name": "codigoCliente",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filtro pelo código do cliente.",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "dataInicial",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filtro pela data inicial do preço.",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "dataFinal",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filtro pela data final do preço.",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "codigoEmbalagem",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filtro pelo código da embalagem."
+          },
+          {
+            "in": "query",
+            "name": "codigoCentro",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filtro pelo código do centro."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_listaPrecos"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          }
+        }
+      }
+    },
+    "/pricing/notas-credito": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/client_id"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Notas de crédito"
+        ],
+        "summary": "Realiza o registro de uma nota de crédito.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/_registroNotaCredito"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_sucessoRegistroNotaCredito"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "_registroDesconto": {
+        "type": "object",
+        "description": "Estrutura do corpo da requisição de registro de desconto.",
+        "properties": {
+          "codigoCliente": {
+            "type": "string",
+            "description": "Código do cliente."
+          },
+          "dataAprovacao": {
+            "type": "string",
+            "description": "Data de aprovação do desconto, no formato yyyy-mm-dd."
+          },
+          "organizacaoVendas": {
+            "type": "string",
+            "description": "Organização de vendas."
+          },
+          "canalVendas": {
+            "type": "string",
+            "description": "Canal de vendas."
+          },
+          "setorAtividade": {
+            "type": "string",
+            "description": "Setor de atividade do cliente."
+          },
+          "centro": {
+            "type": "string",
+            "description": "Centro do cliente."
+          },
+          "codigoMaterial": {
+            "type": "string",
+            "description": "Código do material."
+          },
+          "unidadeMedida": {
+            "type": "string",
+            "description": "Unidade de medida."
+          },
+          "incoterms": {
+            "type": "string",
+            "description": "Incoterms (termos comerciais internacionais)."
+          },
+          "dataInicio": {
+            "type": "string",
+            "description": "Data inicial da vigência do preço, no formato yyyy-mm-dd."
+          },
+          "dataFim": {
+            "type": "string",
+            "description": "Data final da vigência do preço, no formato yyyy-mm-dd."
+          },
+          "valor": {
+            "type": "number",
+            "description": "Valor em reais da condição de preço."
+          },
+          "tipo": {
+            "type": "string",
+            "description": "Tipo de desconto."
+          },
+          "condicao": {
+            "type": "string",
+            "description": "Condição de desconto."
+          },
+          "volumeDe": {
+            "type": "number",
+            "description": "Volume do desconto (início do intervalo)."
+          },
+          "volumeAte": {
+            "type": "number",
+            "description": "Volume do desconto (término do intervalo)."
+          },
+          "periodo": {
+            "type": "string",
+            "description": "Período do desconto."
+          },
+          "motivo": {
+            "type": "string",
+            "description": "Motivo do desconto."
+          },
+          "justificativa": {
+            "type": "string",
+            "description": "Justificativa do desconto."
+          }
+        },
+        "required": [
+          "codigoCliente",
+          "dataAprovacao",
+          "organizacaoVendas",
+          "canalVendas",
+          "setorAtividade",
+          "centro",
+          "codigoMaterial",
+          "incoterms",
+          "dataInicio",
+          "dataFim",
+          "valor",
+          "tipo",
+          "periodo",
+          "motivo",
+          "justificativa"
+        ]
+      },
+      "_atualizacaoDesconto": {
+        "type": "object",
+        "description": "Estrutura do corpo da requisição de atualização de desconto.",
+        "properties": {
+          "codigoCliente": {
+            "type": "string",
+            "description": "Código do cliente."
+          },
+          "organizacaoVendas": {
+            "type": "string",
+            "description": "Organização de vendas."
+          },
+          "canalVendas": {
+            "type": "string",
+            "description": "Canal de vendas."
+          },
+          "setorAtividade": {
+            "type": "string",
+            "description": "Setor de atividade do cliente."
+          },
+          "centro": {
+            "type": "string",
+            "description": "Centro do cliente."
+          },
+          "codigoMaterial": {
+            "type": "string",
+            "description": "Código do material."
+          },
+          "dataInicio": {
+            "type": "string",
+            "description": "Data inicial da vigência do preço, no formato yyyy-mm-dd."
+          },
+          "dataFim": {
+            "type": "string",
+            "description": "Data final da vigência do preço, no formato yyyy-mm-dd."
+          },
+          "valor": {
+            "type": "number",
+            "description": "Valor em reais da condição de preço."
+          },
+          "tipo": {
+            "type": "string",
+            "description": "Tipo de desconto."
+          },
+          "condicao": {
+            "type": "string",
+            "description": "Condição de desconto."
+          },
+          "periodo": {
+            "type": "string",
+            "description": "Período do desconto."
+          },
+          "justificativa": {
+            "type": "string",
+            "description": "Justificativa de preço."
+          }
+        },
+        "required": [
+          "codigoCliente",
+          "organizacaoVendas",
+          "canalVendas",
+          "setorAtividade",
+          "centro",
+          "codigoMaterial",
+          "dataInicio",
+          "dataFim",
+          "valor",
+          "tipo",
+          "periodo",
+          "justificativa"
+        ]
+      },
+      "_registroNotaCredito": {
+        "type": "object",
+        "description": "Estrutura do corpo da requisição de registro de nota de crédito.",
+        "properties": {
+          "codigoCliente": {
+            "type": "string",
+            "description": "Código do cliente."
+          },
+          "organizacaoVendas": {
+            "type": "string",
+            "description": "Organização de vendas."
+          },
+          "canalVendas": {
+            "type": "string",
+            "description": "Canal de vendas."
+          },
+          "setorAtividade": {
+            "type": "string",
+            "description": "Setor de atividade do cliente."
+          },
+          "codigoCentro": {
+            "type": "string",
+            "description": "Código do centro do cliente."
+          },
+          "codigoMaterial": {
+            "type": "string",
+            "description": "Código do material."
+          },
+          "quantidadeMaterial": {
+            "type": "integer",
+            "description": "Quantidade do material."
+          },
+          "valor": {
+            "type": "number",
+            "description": "Valor da nota de crédito."
+          },
+          "motivo": {
+            "type": "string",
+            "description": "Motivo do registro da ordem de crédito."
+          },
+          "justificativa": {
+            "type": "string",
+            "description": "Justificativa da nota de crédito."
+          }
+        },
+        "required": [
+          "codigoCliente",
+          "organizacaoVendas",
+          "canalVendas",
+          "setorAtividade",
+          "centro",
+          "codigoMaterial",
+          "quantidadeMaterial",
+          "valor",
+          "motivo",
+          "justificativa"
+        ]
+      },
+      "_registroPreco": {
+        "type": "object",
+        "description": "Estrutura do corpo da requisição de registro de preço.",
+        "properties": {
+          "codigoCliente": {
+            "type": "string",
+            "description": "Código do cliente."
+          },
+          "dataAprovacao": {
+            "type": "string",
+            "description": "Data de aprovação do desconto, no formato yyyy-mm-dd."
+          },
+          "organizacaoVendas": {
+            "type": "string",
+            "description": "Organização de vendas."
+          },
+          "canalVendas": {
+            "type": "string",
+            "description": "Canal de vendas."
+          },
+          "setorAtividade": {
+            "type": "string",
+            "description": "Setor de atividade do cliente."
+          },
+          "centro": {
+            "type": "string",
+            "description": "Centro do cliente."
+          },
+          "codigoMaterial": {
+            "type": "string",
+            "description": "Código do material."
+          },
+          "unidadeMedida": {
+            "type": "string",
+            "description": "Unidade de medida."
+          },
+          "incoterms": {
+            "type": "string",
+            "description": "Incoterms (termos comerciais internacionais)."
+          },
+          "dataInicio": {
+            "type": "string",
+            "description": "Data inicial da vigência do preço, no formato yyyy-mm-dd."
+          },
+          "dataFim": {
+            "type": "string",
+            "description": "Data final da vigência do preço, no formato yyyy-mm-dd."
+          },
+          "valor": {
+            "type": "number",
+            "description": "Valor em reais da condição de preço."
+          },
+          "quantidade": {
+            "type": "number",
+            "description": "Quantidade de material para o contrato."
+          },
+          "justificativa": {
+            "type": "string",
+            "description": "Justificativa de preço."
+          }
+        },
+        "required": [
+          "codigoCliente",
+          "dataAprovacao",
+          "organizacaoVendas",
+          "canalVendas",
+          "setorAtividade",
+          "centro",
+          "codigoMaterial",
+          "incoterms",
+          "dataInicio",
+          "dataFim",
+          "valor",
+          "quantidade",
+          "justificativa"
+        ]
+      },
+      "_sucessoRegistroNotaCredito": {
+        "type": "object",
+        "description": "Estrutura da resposta de sucesso ao registrar uma nota de crédito.",
+        "properties": {
+          "codigoNotaCredito": {
+            "type": "string",
+            "description": "Código da nota de crédito registrada."
+          }
+        }
+      },
+      "_centro": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Código do centro."
+          },
+          "tipo": {
+            "type": "string",
+            "description": "Tipo do centro."
+          }
+        },
+        "required": [
+          "codigo",
+          "tipo"
+        ]
+      },
+      "_itemPreco": {
+        "type": "object",
+        "properties": {
+          "codigoCliente": {
+            "type": "string",
+            "description": "Código do cliente."
+          },
+          "codigoEmbalagem": {
+            "type": "string",
+            "description": "Código da embalagem."
+          },
+          "valor": {
+            "type": "number",
+            "description": "Valor do preço."
+          },
+          "codigoIncoterms": {
+            "type": "string",
+            "description": "Código do incoterms."
+          },
+          "centro": {
+            "$ref": "#/components/schemas/_centro"
+          },
+          "dataInicioVigencia": {
+            "type": "string",
+            "description": "Data de início da vigência, no formato yyyy-mm-dd."
+          },
+          "dataFimVigencia": {
+            "type": "string",
+            "description": "Data de encerramento da vigência, no formato yyyy-mm-dd."
+          },
+          "dataSolicitacao": {
+            "type": "string",
+            "description": "Data da solicitação, no formato yyyy-mm-dd."
+          },
+          "dataAprovacao": {
+            "type": "string",
+            "description": "Data da aprovação, no formato yyyy-mm-dd."
+          }
+        },
+        "required": [
+          "codigoCliente",
+          "idConta",
+          "codigoEmbalagem",
+          "valor",
+          "codigoIncoterms",
+          "centro",
+          "dataInicioVigencia",
+          "dataFimVigencia",
+          "dataSolicitacao",
+          "dataAprovacao"
+        ]
+      },
+      "_listaPrecos": {
+        "type": "array",
+        "description": "Lista de preços do cliente.",
+        "items": {
+          "$ref": "#/components/schemas/_itemPreco"
+        }
+      },
+      "_erro": {
+        "type": "object",
+        "description": "Estrutura de um erro.",
+        "properties": {
+          "tipo": {
+            "type": "string",
+            "description": "Tipo do erro."
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição do erro."
+          }
+        }
+      },
+      "_listaErros": {
+        "type": "array",
+        "description": "Lista de erros identificados/ocorridos.",
+        "items": {
+          "$ref": "#/components/schemas/_erro"
+        }
+      }
+    },
+    "parameters": {
+      "client_id": {
+        "in": "header",
+        "name": "client_id",
+        "description": "Identificador do App cadastrado no portal.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "access_token": {
+        "in": "header",
+        "name": "access_token",
+        "description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "OkWithoutBody": {
+        "description": "Ok."
+      },
+      "CreatedWithoutBody": {
+        "description": "Created"
+      },
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/_listaErros"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/_listaErros"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/_listaErros"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/_listaErros"
+            }
+          }
+        }
+      },
+      "NotImplemented": {
+        "description": "Not implemented",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/_listaErros"
+            }
+          }
+        }
+      },
+      "BadGateway": {
+        "description": "Bad gateway",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/_listaErros"
+            }
+          }
+        }
+      },
+      "GatewayTimeout": {
+        "description": "Gateway timeout",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/_listaErros"
+            }
+          }
+        }
+      }
+    }
+  }
+}

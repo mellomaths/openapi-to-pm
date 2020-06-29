@@ -1,0 +1,1723 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Faturamento",
+    "description": "API de informações de faturamento de clientes Supergasbras",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api-supergasbras.sensedia.com/sb/ecc/faturamentos/v1",
+      "description": "Sandbox"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/dev/ecc/faturamentos/v1",
+      "description": "Desenvolvimento"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/hml/ecc/faturamentos/v1",
+      "description": "Homologação"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/ecc/faturamentos/v1",
+      "description": "Produção"
+    }
+  ],
+  "paths": {
+    "/faturamentos/{id}/pendencias": {
+      "get": {
+        "tags": [
+          "Faturamentos"
+        ],
+        "summary": "Consulta pendências de faturamento de um cliente.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identificador do cliente que deseja o histórico de pendências.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_pendencias"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/faturamentos/{id}/titulos": {
+      "get": {
+        "tags": [
+          "Faturamentos"
+        ],
+        "summary": "Consulta do histórico de títulos baixados de um cliente.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identificador do cliente que deseja o histórico de faturamento.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "data",
+            "description": "Data da compensação do título.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_faturamentos"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/faturamentos/{id}/titulos-financeiros": {
+      "get": {
+        "tags": [
+          "Faturamentos"
+        ],
+        "summary": "Consulta do histórico de títulos financeiros de um cliente.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identificador do cliente associado aos títulos financeiros.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "dataInicial",
+            "description": "Filtro por período de datas (início do intervalo).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "dataFinal",
+            "description": "Filtro por período de datas (fim do intervalo).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/_tituloFinanceiro"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/faturamentos/boletos": {
+      "post": {
+        "tags": [
+          "Boletos"
+        ],
+        "summary": "Emissão de boleto para um cliente.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/_emissaoBoleto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_emissaoBoletoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/faturamentos/boletos-adiantamento": {
+      "post": {
+        "tags": [
+          "Boletos"
+        ],
+        "summary": "Emissão de boleto de adiantamento para um cliente.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/_emissaoAdiantamentoBoleto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_emissaoAdiantamentoBoletoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/faturamentos/boletos-reemissao": {
+      "post": {
+        "tags": [
+          "Boletos"
+        ],
+        "summary": "Emissão de 2via boleto para um cliente.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/_remissaoBoleto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_remissaoBoletoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/faturamentos/notas-fiscais": {
+      "post": {
+        "tags": [
+          "Notas Fiscais"
+        ],
+        "summary": "Reemissão de nota fiscal para um cliente.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/_notaFiscal"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_notaFiscalResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/faturamentos/{id}/precos": {
+      "get": {
+        "tags": [
+          "Preços"
+        ],
+        "summary": "Consulta de preço de um cliente.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identificador do cliente.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "idProduto",
+            "description": "Identificador do produto.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "idCentro",
+            "description": "Identificador do centro.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "dentificador de autorização recuperado pelo processo. OAuth 2.0.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_preco"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "_pendencias": {
+        "properties": {
+          "pendencias": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/_pendencia"
+            }
+          }
+        }
+      },
+      "_faturamentos": {
+        "properties": {
+          "titulosBaixados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/_faturamento"
+            }
+          }
+        }
+      },
+      "_faturamento": {
+        "type": "object",
+        "properties": {
+          "codigoCliente": {
+            "type": "string",
+            "description": "Código do cliente."
+          },
+          "numeroDocumento": {
+            "type": "string",
+            "description": "Número do Documento Contábil."
+          },
+          "numeroIntFiscal": {
+            "type": "string",
+            "description": "Número do Documento."
+          },
+          "estabelecimento": {
+            "type": "string",
+            "description": "Código do Estabelecimento."
+          },
+          "especie": {
+            "type": "string",
+            "description": "Número da especie da nota fiscal."
+          },
+          "descricaoEspecie": {
+            "type": "string",
+            "description": "Descrição da Espécie."
+          },
+          "serie": {
+            "type": "string",
+            "description": "Número da Série da Nota Fiscal."
+          },
+          "parcela": {
+            "type": "string",
+            "description": "Quantidade de Parcelas."
+          },
+          "valor": {
+            "type": "number",
+            "description": "Valor Total da Nota Fiscal."
+          },
+          "dataEmissao": {
+            "type": "string",
+            "description": "Data de Emissão da Nota Fiscal."
+          },
+          "dataVencimento": {
+            "type": "string",
+            "description": "Data de Vencimento."
+          },
+          "situacao": {
+            "type": "string",
+            "description": "Situação da Nota Fiscal."
+          },
+          "descricaoSituacao": {
+            "type": "string",
+            "description": "Descrição da Situação."
+          },
+          "dataBaixa": {
+            "type": "string",
+            "description": "Data da Baixa do Título."
+          },
+          "valorMulta": {
+            "type": "number",
+            "description": "Valor da Multa."
+          },
+          "empresa": {
+            "type": "string",
+            "description": "Código da empresa."
+          }
+        }
+      },
+      "_pendencia": {
+        "type": "object",
+        "properties": {
+          "codigoCliente": {
+            "type": "string",
+            "description": "Código do cliente."
+          },
+          "numeroDocumento": {
+            "type": "string",
+            "description": "Número do Documento Contábil."
+          },
+          "numeroIntFiscal": {
+            "type": "string",
+            "description": "Número do Documento."
+          },
+          "estabelecimento": {
+            "type": "string",
+            "description": "Código do Estabelecimento."
+          },
+          "descricaoEspecie": {
+            "type": "string",
+            "description": "Descrição da Espécie."
+          },
+          "serie": {
+            "type": "string",
+            "description": "Número da Série da Nota Fiscal."
+          },
+          "parcela": {
+            "type": "string",
+            "description": "Quantidade de Parcelas."
+          },
+          "valor": {
+            "type": "number",
+            "description": "Valor Total da Nota Fiscal."
+          },
+          "saldo": {
+            "type": "number",
+            "description": "Saldo."
+          },
+          "dataEmissao": {
+            "type": "string",
+            "description": "Data de Emissão da Nota Fiscal."
+          },
+          "dataVencimento": {
+            "type": "string",
+            "description": "Data de Vencimento."
+          },
+          "dias": {
+            "type": "integer",
+            "description": "Quantidade de Dias."
+          },
+          "situacao": {
+            "type": "string",
+            "description": "Situação da Nota Fiscal."
+          },
+          "descricaoSituacao": {
+            "type": "string",
+            "description": "Descrição da Situação."
+          },
+          "especie": {
+            "type": "string",
+            "description": "Espécie."
+          },
+          "liberadoBoleto": {
+            "type": "string",
+            "description": "Liberado Boleto."
+          },
+          "empresa": {
+            "type": "string",
+            "description": "Código da Empresa."
+          },
+          "codigoBanco": {
+            "type": "string",
+            "description": "Código do Banco."
+          },
+          "agencia": {
+            "type": "string",
+            "description": "Número da Agência."
+          },
+          "contaCorrente": {
+            "type": "string",
+            "description": "Número da Conta Corrente."
+          },
+          "DVContaCorrente": {
+            "type": "string",
+            "description": "Dígito da Conta Corrente."
+          },
+          "carteira": {
+            "type": "string",
+            "description": "Número da Carteira."
+          },
+          "nossoNumero": {
+            "type": "string",
+            "description": "Chave de Referência do banco."
+          },
+          "DVNossoNumero": {
+            "type": "string",
+            "description": "Último dígito do Nosso Número."
+          },
+          "chaveCripto": {
+            "type": "string",
+            "description": "Chave de Criptografia do Banco."
+          },
+          "codigoEmpBanco": {
+            "type": "string",
+            "description": "Código da Empresa no Banco."
+          }
+        }
+      },
+      "_erro": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "tipo": {
+              "type": "string",
+              "description": "Tipo do erro."
+            },
+            "descricao": {
+              "type": "string",
+              "description": "Descrição do erro."
+            }
+          }
+        }
+      },
+      "_emissaoAdiantamentoBoleto": {
+        "type": "object",
+        "required": [
+          "codigoCliente",
+          "datadocuemnto",
+          "empresa",
+          "montante",
+          "vencimento",
+          "filial",
+          "areaControleCredito",
+          "bancoParceiro",
+          "bancoEmpresa",
+          "contaDoBancoEmpresa",
+          "formaPagamento"
+        ],
+        "properties": {
+          "codigoCliente": {
+            "type": "string",
+            "description": "Código do cliente."
+          },
+          "dataDocumento": {
+            "type": "string",
+            "description": "Data do Documento."
+          },
+          "tipoDocumento": {
+            "type": "string",
+            "description": "Tipo de Documento."
+          },
+          "empresa": {
+            "type": "string",
+            "description": "Empresa."
+          },
+          "referencia": {
+            "type": "string",
+            "description": "Referência utilizada para fazer o adiantamento."
+          },
+          "textoCabecalhoDocumento": {
+            "type": "string",
+            "description": "Texto do documento do cabeçalho."
+          },
+          "razaoEspecial": {
+            "type": "string",
+            "description": "Razão Especial do Adiantamento."
+          },
+          "montante": {
+            "type": "number",
+            "description": "Valor do Montante."
+          },
+          "vencimento": {
+            "type": "string",
+            "description": "Data do Vencimento do Adiantamento."
+          },
+          "filial": {
+            "type": "string",
+            "description": "Nome da Filial."
+          },
+          "areaControleCredito": {
+            "type": "string",
+            "description": "Área de Controle de Crédito."
+          },
+          "textoItem": {
+            "type": "string",
+            "description": "Texto do Item."
+          },
+          "atribuicao": {
+            "type": "string",
+            "description": "Atribuição."
+          },
+          "bancoParceiro": {
+            "type": "string",
+            "description": "Código do Banco do Parceiro."
+          },
+          "bancoEmpresa": {
+            "type": "string",
+            "description": "Código do Banco Empresa."
+          },
+          "contaDoBancoEmpresa": {
+            "type": "string",
+            "description": "Conta do Banco Empresa."
+          },
+          "formaPagamento": {
+            "type": "string",
+            "description": "Forma de pagamento."
+          }
+        }
+      },
+      "_emissaoBoleto": {
+        "type": "object",
+        "required": [
+          "empresa",
+          "documentoContabil",
+          "ano",
+          "tipo"
+        ],
+        "properties": {
+          "empresa": {
+            "type": "string",
+            "description": "Empresa."
+          },
+          "documentoContabil": {
+            "type": "string",
+            "description": "Número do Documento."
+          },
+          "ano": {
+            "type": "string",
+            "description": "Ano do documento."
+          },
+          "tipo": {
+            "type": "string",
+            "description": "Tipo do Documento."
+          },
+          "emailTo": {
+            "type": "string",
+            "description": "Email para o destinatário."
+          },
+          "emailCC": {
+            "type": "string",
+            "description": "Email com cópia."
+          },
+          "emailCCO": {
+            "type": "string",
+            "description": "Email com cópia oculta."
+          },
+          "nomeArquivo": {
+            "type": "string",
+            "description": "Nome do arquivo que será salvo."
+          },
+          "diretorio": {
+            "type": "string",
+            "description": "Diretório aonde o arquivo que será salvo."
+          }
+        }
+      },
+      "_remissaoBoleto": {
+        "type": "object",
+        "required": [
+          "estabelecimento",
+          "especie",
+          "serie",
+          "documento",
+          "codigoCliente",
+          "parcela",
+          "tipo",
+          "destino",
+          "emailRemetente"
+        ],
+        "properties": {
+          "estabelecimento": {
+            "type": "string",
+            "description": "Código do Estabelecimento."
+          },
+          "especie": {
+            "type": "string",
+            "description": "Número identificador da espécie do documento."
+          },
+          "serie": {
+            "type": "string",
+            "description": "Número identificador da série do documento."
+          },
+          "documento": {
+            "type": "string",
+            "description": "Número do Documento."
+          },
+          "codigoCliente": {
+            "type": "string",
+            "description": "Código do Cliente."
+          },
+          "parcela": {
+            "type": "string",
+            "description": "Número de Parcelas do Boleto."
+          },
+          "tipo": {
+            "type": "string",
+            "description": "Tipo de envio do boleto."
+          },
+          "destino": {
+            "type": "string",
+            "description": "Destino do envio do boleto."
+          },
+          "emailRemetente": {
+            "type": "string",
+            "description": "Endereço de e-mail do remetente."
+          },
+          "dataOriginal": {
+            "type": "string",
+            "description": "Data Original que o boleto será liquidado."
+          },
+          "reemissao": {
+            "type": "string",
+            "description": "Reemitir ou não o boleto."
+          }
+        }
+      },
+      "_emissaoAdiantamentoBoletoResponse": {
+        "type": "object",
+        "properties": {
+          "empresa": {
+            "type": "string",
+            "description": "Código da Empresa."
+          },
+          "documentoContabil": {
+            "type": "string",
+            "description": "Número do Adiantamento."
+          },
+          "ano": {
+            "type": "string",
+            "description": "Ano do Documento Contábil."
+          },
+          "situacao": {
+            "type": "string",
+            "description": "Situação de “Sucesso” ou “Insucesso”."
+          },
+          "mensagens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/_mensagensBoletos"
+            }
+          }
+        }
+      },
+      "_mensagensBoletos": {
+        "type": "object",
+        "properties": {
+          "tipoMensagem": {
+            "type": "string",
+            "description": "Tipo da mensagem."
+          },
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem."
+          }
+        }
+      },
+      "_emissaoBoletoResponse": {
+        "type": "object",
+        "properties": {
+          "codigoBarras": {
+            "type": "string",
+            "description": "Código de Barras."
+          },
+          "pdfBoleto": {
+            "type": "string",
+            "description": "Arquivo PDF gerado em Base64."
+          }
+        }
+      },
+      "_remissaoBoletoResponse": {
+        "type": "object",
+        "properties": {
+          "codigoBarras": {
+            "type": "string",
+            "description": "Número do código de Barras do boleto."
+          }
+        }
+      },
+      "_notaFiscal": {
+        "type": "object",
+        "required": [
+          "numeroDocumento",
+          "emailTO"
+        ],
+        "properties": {
+          "numeroDocumento": {
+            "type": "string",
+            "description": "Empresa"
+          },
+          "emailTO": {
+            "type": "string",
+            "description": "Email de envio para o destinatário do arquivo XML."
+          },
+          "emailCC": {
+            "type": "string",
+            "description": "Email de envio do arquivo XML com cópia."
+          },
+          "emailCO": {
+            "type": "string",
+            "description": "Email de envio do arquivo XML com cópia oculta."
+          }
+        }
+      },
+      "_notaFiscalResponse": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Mensagem de retorno ao solicitar Reenvio de XML"
+          }
+        }
+      },
+      "_preco": {
+        "type": "object",
+        "properties": {
+          "codigoEmitente": {
+            "type": "string",
+            "description": "Codigo do cliente."
+          },
+          "codigoProduto": {
+            "type": "string",
+            "description": "Codigo do produto."
+          },
+          "descontoProduto": {
+            "type": "number",
+            "description": "Desconto do produto."
+          },
+          "valorCIF": {
+            "type": "number",
+            "description": "Valor livre do frete."
+          },
+          "valorFOB": {
+            "type": "number",
+            "description": "Valor do frete incluindo custos e seguros."
+          }
+        }
+      },
+      "_tituloFinanceiro": {
+        "type": "object",
+        "properties": {
+          "codigoEmpresa": {
+            "type": "string",
+            "description": "Código da empresa."
+          },
+          "codigoEstabelecimento": {
+            "type": "string",
+            "description": "Código do estabelecimento."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status do título financeiro."
+          },
+          "numero": {
+            "type": "string",
+            "description": "Número do título financeiro (identificador)."
+          },
+          "dataVencimento": {
+            "type": "string",
+            "description": "Data de vencimento, formato yyyy-mm-dd."
+          },
+          "parcelas": {
+            "type": "integer",
+            "description": "Número de parcelas."
+          },
+          "numeroSerie": {
+            "type": "string",
+            "description": "Número de série."
+          },
+          "especie": {
+            "type": "object",
+            "description": "Espécie do título financeiro.",
+            "properties": {
+              "codigo": {
+                "type": "string",
+                "description": "Código da espécie."
+              },
+              "descricao": {
+                "type": "string",
+                "description": "Descrição da espécie."
+              }
+            }
+          },
+          "valor": {
+            "type": "number",
+            "description": "Valor do título finaneiro (em reais)."
+          },
+          "saldo": {
+            "type": "number",
+            "description": "Saldo do título financeiro (em reais)."
+          },
+          "numeroDocumentoContabil": {
+            "type": "string",
+            "description": "Número do documento contábil."
+          },
+          "numeroIntFiscal": {
+            "type": "string",
+            "description": "Número do documento fiscal."
+          },
+          "codigoCliente": {
+            "type": "string",
+            "description": "Código do cliente."
+          },
+          "ano": {
+            "type": "integer",
+            "description": "Ano do título."
+          }
+        }
+      }
+    }
+  }
+}

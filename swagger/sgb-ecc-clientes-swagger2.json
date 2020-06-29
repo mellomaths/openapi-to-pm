@@ -1,0 +1,799 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "API de adaptação ao SAP.",
+		"version": "1.0.0",
+		"title": "API Wrapper SAP"
+	},
+	"host": "api-supergasbras.sensedia.com",
+	"basePath": "/sb/wrapper-sap/v1",
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"schemes": [
+		"https"
+	],
+	"paths": {
+		"/clientes": {
+			"post": {
+				"tags": [
+					"Clientes"
+				],
+				"summary": "Criar cliente",
+				"description": "Criação de cliente.",
+				"parameters": [
+					{
+						"in": "header",
+						"name": "client_id",
+						"description": "Identificador do App cadastrado no portal.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "header",
+						"name": "access_token",
+						"description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "body",
+						"name": "cliente",
+						"description": "Dados do cliente a ser criado.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/clientesRequest"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/definitions/clientesResponse"
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"schema": {
+							"$ref": "#/definitions/erro"
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/erro"
+						}
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/erro"
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"schema": {
+							"$ref": "#/definitions/erro"
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"schema": {
+							"$ref": "#/definitions/erro"
+						}
+					},
+					"501": {
+						"description": "Not Implemented",
+						"schema": {
+							"$ref": "#/definitions/erro"
+						}
+					},
+					"502": {
+						"description": "Bad Gateway",
+						"schema": {
+							"$ref": "#/definitions/erro"
+						}
+					},
+					"504": {
+						"description": "Gateway Timeout",
+						"schema": {
+							"$ref": "#/definitions/erro"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"clientesRequest": {
+			"type": "object",
+			"properties": {
+				"conta": {
+					"type": "object",
+					"properties": {
+						"idContaSalesforce": {
+							"type": "string",
+							"description": "ID da conta no Salesforce."
+						},
+						"statusClienteSAP": {
+							"type": "string",
+							"description": "Status do Cliente SAP 'Ativo' ou 'Inativo'."
+						},
+						"vendedorManutencao": {
+							"type": "string",
+							"description": "Login do Vendedor de Manutenção."
+						},
+						"vendedorCaptacao": {
+							"type": "string",
+							"description": "Login do Vendedor de Captação."
+						},
+						"vendedorVI": {
+							"type": "string",
+							"description": "Login do Vendedor Venda Indireta."
+						},
+						"grupoConta": {
+							"type": "string",
+							"description": "Código do Grupo de Conta."
+						},
+						"localizacacao": {
+							"type": "object",
+							"properties": {
+								"longitude": {
+									"type": "string",
+									"description": "Longitude."
+								},
+								"latitude": {
+									"type": "string",
+									"description": "Latitude."
+								}
+							}
+						},
+						"grupoEmpresa": {
+							"type": "string",
+							"description": "Grupo Empresa."
+						},
+						"cnpj": {
+							"type": "string",
+							"description": "CNPJ do cliente."
+						},
+						"cpf": {
+							"type": "string",
+							"description": "CPF do cliente."
+						},
+						"inscricaoEstadual": {
+							"type": "string",
+							"description": "Número da Inscrição Estadual."
+						},
+						"inscricaoMunicipal": {
+							"type": "string",
+							"description": "Número da Inscrição Municipal."
+						},
+						"inscricaoSUFRAMA": {
+							"type": "string",
+							"description": "Inscrição Suframa de clientes da Zona Franca Manaus."
+						},
+						"rne": {
+							"type": "string",
+							"description": "Registros de clientes estrangeiros."
+						},
+						"dataExpedicaoRNE": {
+							"type": "string",
+							"format": "date",
+							"description": "Data de Expedição do registro de clientes estrangeiros."
+						},
+						"classeFiscal": {
+							"type": "string",
+							"description": "Código da Classe Fiscal."
+						},
+						"politicaRelacionamento": {
+							"type": "string",
+							"description": "Política de Relacionamento."
+						},
+						"subsegmento": {
+							"type": "string",
+							"description": "Código do Subsegmento."
+						},
+						"ramoAtividade": {
+							"type": "string",
+							"description": "Código do Ramo de Atividade."
+						},
+						"regiao": {
+							"type": "string",
+							"description": "Região do logradouro do cliente."
+						},
+						"volumePotencial": {
+							"type": "string",
+							"description": "Volume Potencial."
+						},
+						"inscricaoINSSCEI": {
+							"type": "string",
+							"description": "Inscrição INSS CEI."
+						},
+						"dataAberturaEmpresa": {
+							"type": "string",
+							"format": "date",
+							"description": "Data de Abertura da Empresa."
+						},
+						"mesorregiao": {
+							"type": "string",
+							"description": "Mesoregião."
+						},
+						"microrregiao": {
+							"type": "string",
+							"description": "Microregião."
+						},
+						"ativacaoCliente": {
+							"type": "string",
+							"description": "Tipo de Ativação do Cliente."
+						},
+						"inativacaoCliente": {
+							"type": "string",
+							"description": "Tipo de Inativação do Cliente."
+						},
+						"idAntecessor": {
+							"type": "string",
+							"description": "ID do Antecessor – Código do Identificador do Salesforce."
+						},
+						"capexFundoComercio": {
+							"type": "string",
+							"description": "Capex Fundo Comércio."
+						},
+						"corporativo": {
+							"type": "boolean",
+							"description": "Grupo econômico que é atendido por mais de uma unidade Supergasbras."
+						},
+						"keyAccount": {
+							"type": "boolean",
+							"description": "Key Account."
+						},
+						"orgaoPublico": {
+							"type": "boolean",
+							"description": "Orgão Público."
+						},
+						"caldeira": {
+							"type": "boolean",
+							"description": "Caldeira."
+						},
+						"cozinhaIndustrial": {
+							"type": "boolean",
+							"description": "Cozinha Industrial."
+						},
+						"ecoDriyer": {
+							"type": "boolean",
+							"description": "Eco Driyer."
+						},
+						"forno": {
+							"type": "boolean",
+							"description": "Forno."
+						},
+						"geradorEletrico": {
+							"type": "boolean",
+							"description": "Gerador Elétrico."
+						},
+						"smg": {
+							"type": "boolean",
+							"description": "SMG."
+						},
+						"tpc": {
+							"type": "boolean",
+							"description": "TCP."
+						},
+						"usinaAsfalto": {
+							"type": "boolean",
+							"description": "Usina Asfato."
+						},
+						"mesReajuste": {
+							"type": "string",
+							"description": "Mês de Reajuste."
+						},
+						"vendaSPOT": {
+							"type": "boolean",
+							"description": "Venda Spot."
+						},
+						"territorio": {
+							"type": "boolean",
+							"description": "Território."
+						},
+						"flt": {
+							"type": "boolean",
+							"description": "FLT."
+						},
+						"exclusivo": {
+							"type": "boolean",
+							"description": "Exclusivo."
+						},
+						"formaTratamento": {
+							"type": "string",
+							"description": "Forma de Tratamento."
+						},
+						"razaoSocial": {
+							"type": "string",
+							"description": "Razão Social."
+						},
+						"nomeFantasia": {
+							"type": "string",
+							"description": "Nome Fantasia."
+						},
+						"endereco": {
+							"type": "object",
+							"properties": {
+								"rua": {
+									"type": "string",
+									"description": "Logradouro do cliente."
+								},
+								"numero": {
+									"type": "string",
+									"description": "Numero do logradouro do cliente."
+								},
+								"bairro": {
+									"type": "string",
+									"description": "Bairro do logradouro do cliente."
+								},
+								"cidade": {
+									"type": "string",
+									"description": "Cidade do logradouro do cliente."
+								},
+								"cep": {
+									"type": "string",
+									"description": "CEP do logradouro do cliente."
+								},
+								"complemento": {
+									"type": "string",
+									"description": "Complemento do logradouro do cliente."
+								}
+							}
+						},
+						"dadosAdicionais": {
+							"type": "string",
+							"description": "Dados Adicionais."
+						},
+						"caixaPostal": {
+							"type": "boolean",
+							"description": "Caixa Postal do cliente."
+						},
+						"pais": {
+							"type": "string",
+							"description": "Pais do logradouro do cliente."
+						},
+						"grupoEconomico": {
+							"type": "string",
+							"description": "Grupo Economico."
+						},
+						"idMatriz": {
+							"type": "string",
+							"description": "Identificador da Matriz."
+						},
+						"estado": {
+							"type": "string",
+							"description": "Estado do logradouro do cliente."
+						},
+						"cidadeSatelite": {
+							"type": "string",
+							"description": "Cidade Satelite do Contato."
+						},
+						"cnae": {
+							"type": "string",
+							"description": "Identifica o Ramo de Atividade."
+						},
+						"possuiCapex": {
+							"type": "boolean",
+							"description": "Possui Capex."
+						},
+						"classeArmazenamneto": {
+							"type": "string",
+							"description": "Classe de Armazenamento."
+						},
+						"quantidadePortaria27": {
+							"type": "number",
+							"description": "Quantidade Portaria 27."
+						},
+						"quantidadeNBR15514": {
+							"type": "number",
+							"description": "Quantidade NBR 15514."
+						},
+						"codigoEmissorOrdem": {
+							"type": "string",
+							"description": "Código que identificar o emissor de ordem de um recebedor de mercadoria."
+						},
+						"codigoAntecessor": {
+							"type": "string",
+							"description": "Código do Cliente no SAP ECC."
+						},
+						"areasVendas": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/areaVendas"
+							}
+						},
+						"emails": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/email"
+							}
+						},
+						"dadosFinanceiros": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/dadosFinanceirosObject"
+							}
+						},
+						"telefones": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/telefone"
+							}
+						},
+						"faxes": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/fax"
+							}
+						}
+					}
+				},
+				"contatos": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/contato"
+					}
+				},
+				"parceiros": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/parceiro"
+					}
+				},
+				"pricings": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/pricingProduto"
+					}
+				}
+			}
+		},
+		"clientesResponse": {
+			"type": "object",
+			"properties": {
+				"idCliente": {
+					"type": "string",
+					"description": "ID do cliente criado."
+				}
+			}
+		},
+		"areaVendas": {
+			"type": "object",
+			"properties": {
+				"idAreaVendaSalesForce": {
+					"type": "string",
+					"description": "ID Area Venda SalesForce."
+				},
+				"organizacaoAreaVenda": {
+					"type": "string",
+					"description": "Organização área de Venda."
+				},
+				"canalDistribuicao": {
+					"type": "string",
+					"description": "Código do Canal de Distribuição."
+				},
+				"setorAtividade": {
+					"type": "string",
+					"description": "Código do Setor de Atividade."
+				},
+				"empresaAreaVenda": {
+					"type": "string",
+					"description": "Empresa de área de Venda."
+				},
+				"condicaoPagamento": {
+					"type": "string",
+					"description": "Código da Condição de Pagamento."
+				},
+				"micromercado": {
+					"type": "string",
+					"description": "Micromercado."
+				},
+				"escritorioVendas": {
+					"type": "string",
+					"description": "Código do Escritório de Vendas."
+				},
+				"grupoVendedores": {
+					"type": "string",
+					"description": "Código do Grupo de Vendedores."
+				},
+				"grupoClientes": {
+					"type": "string",
+					"description": "Código do Grupo de Clientes."
+				},
+				"grupoPreco": {
+					"type": "string",
+					"description": "Código do Grupo de Preço."
+				},
+				"centroFornecedor": {
+					"type": "string",
+					"description": "Código do Estabelecimento."
+				},
+				"incoterms": {
+					"type": "string",
+					"description": "Identifica o código CIF ou o FOB."
+				},
+				"incoterms2": {
+					"type": "string",
+					"description": "Identifica o código CIF ou o FOB."
+				}
+			}
+		},
+		"email": {
+			"type": "object",
+			"properties": {
+				"idEmailSalesForce": {
+					"type": "string",
+					"description": "Identifica o Email da Conta SalesForce."
+				},
+				"email": {
+					"type": "string",
+					"description": "E-mail do cliente na conta."
+				},
+				"nfe": {
+					"type": "string",
+					"description": "E-mail para a emissão da Nota Fiscal Eletrônica."
+				}
+			}
+		},
+		"dadosFinanceirosObject": {
+			"type": "object",
+			"properties": {
+				"empresa": {
+					"type": "string",
+					"description": "Empresa."
+				},
+				"condicaoPagamento": {
+					"type": "string",
+					"description": "Condição de Pagamento."
+				}
+			}
+		},
+		"telefone": {
+			"type": "object",
+			"properties": {
+				"idTelefoneSalesForce": {
+					"type": "string",
+					"description": "Identificador do Telefone Conta SalesForce."
+				},
+				"telefone": {
+					"type": "string",
+					"description": "Número do Telefone."
+				},
+				"extensao": {
+					"type": "string",
+					"description": "Número da Extensão."
+				},
+				"tipoTelefone": {
+					"type": "string",
+					"description": "Tipo de Telefone."
+				}
+			}
+		},
+		"fax": {
+			"type": "object",
+			"properties": {
+				"idFaxSalesForce": {
+					"type": "string",
+					"description": "Identificador do Fax da Conta SalesForce."
+				},
+				"fax": {
+					"type": "string",
+					"description": "Número do Fax."
+				},
+				"extensao": {
+					"type": "string",
+					"description": "Número Extensão do Fax."
+				}
+			}
+		},
+		"contato": {
+			"type": "object",
+			"properties": {
+				"idContatoSalesForce": {
+					"type": "string",
+					"description": "Identificador do Contato do SalesForce."
+				},
+				"sobrenomeContato": {
+					"type": "string",
+					"description": "Sobrenome do Contato."
+				},
+				"nomeContato": {
+					"type": "string",
+					"description": "Nome do Contato."
+				},
+				"departamentoContato": {
+					"type": "string",
+					"description": "Departamento do Contato."
+				},
+				"funcaoContato": {
+					"type": "string",
+					"description": "Função do Contato."
+				},
+				"endereco": {
+					"type": "object",
+					"properties": {
+						"ruaContato": {
+							"type": "string",
+							"description": "Rua do Contato."
+						},
+						"numeroContato": {
+							"type": "string",
+							"description": "Numero do Contato."
+						},
+						"bairroContato": {
+							"type": "string",
+							"description": "Bairro do Contato."
+						},
+						"cidadeContato": {
+							"type": "string",
+							"description": "Cidade do Contato."
+						},
+						"cepContato": {
+							"type": "string",
+							"description": "CEP do Contato."
+						},
+						"complementoContato": {
+							"type": "string",
+							"description": "Complemento do Contato."
+						}
+					}
+				},
+				"dadosAdicionaisContato": {
+					"type": "string",
+					"description": "Dados Adicionais do Contato."
+				},
+				"estadoContato": {
+					"type": "string",
+					"description": "Estado do Contato."
+				},
+				"cidadeSateliteContato": {
+					"type": "string",
+					"description": "Cidade Satélite do Contato."
+				},
+				"paisContato": {
+					"type": "string",
+					"description": "País do Contato."
+				},
+				"emails": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/emailContato"
+					}
+				},
+				"telefones": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/telefoneContato"
+					}
+				},
+				"faxes": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/faxContato"
+					}
+				}
+			}
+		},
+		"emailContato": {
+			"type": "object",
+			"properties": {
+				"idEmailSalesForce": {
+					"type": "string",
+					"description": "Identificador Email do Contato do Salesforce."
+				},
+				"email": {
+					"type": "string",
+					"description": "Email do Contato."
+				}
+			}
+		},
+		"telefoneContato": {
+			"type": "object",
+			"properties": {
+				"idTelefoneSalesForce": {
+					"type": "string",
+					"description": "Identificador do telefone do Contato do Salesforce."
+				},
+				"telefone": {
+					"type": "string",
+					"description": "Telefone do Contato."
+				},
+				"extensao": {
+					"type": "string",
+					"description": "Extensão do Contato."
+				},
+				"tipoTelefone": {
+					"type": "string",
+					"description": "Tipo de telefone do Contato."
+				}
+			}
+		},
+		"faxContato": {
+			"type": "object",
+			"properties": {
+				"idFaxSalesForce": {
+					"type": "string",
+					"description": "Identificador do fax do contato do Salesforce."
+				},
+				"fax": {
+					"type": "string",
+					"description": "Fax do Contato."
+				},
+				"extensao": {
+					"type": "string",
+					"description": "Extensão Fax Contato."
+				}
+			}
+		},
+		"parceiro": {
+			"type": "object",
+			"properties": {
+				"idContaParceiroSalesForce": {
+					"type": "string",
+					"description": "Identificador da conta parceiro do Salesforce."
+				},
+				"idAreaVendas": {
+					"type": "string",
+					"description": "Identificador da área de Vendas."
+				},
+				"idContaEmissor": {
+					"type": "string",
+					"description": "Identificador da Conta do Emissor."
+				},
+				"funcaoParceiroNegocio": {
+					"type": "string",
+					"description": "Função Parceiro de Negocio."
+				},
+				"organizacaoVenda": {
+					"type": "string",
+					"description": "Organização de Venda."
+				},
+				"canalDistribuicao": {
+					"type": "string",
+					"description": "Canal de Distribuição."
+				},
+				"setorAtividade": {
+					"type": "string",
+					"description": "Setor de Atividade."
+				}
+			}
+		},
+		"pricingProduto": {
+			"type": "object",
+			"properties": {
+				"idPricingSalesForce": {
+					"type": "string",
+					"description": "Identificador do Pricing Salesforce."
+				},
+				"codigoProduto": {
+					"type": "string",
+					"description": "Codigo do Produto."
+				},
+				"valor": {
+					"type": "number",
+					"description": "Valor em reais do produto."
+				}
+			}
+		},
+		"erro": {
+			"type": "object",
+			"properties": {
+				"codigo": {
+					"type": "string",
+					"description": "Código de informação de erro."
+				},
+				"mensagem": {
+					"type": "string",
+					"description": "Mensagem de informação de erro."
+				}
+			}
+		}
+	}
+}

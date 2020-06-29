@@ -1,0 +1,16 @@
+1. Nomear as operações
+
+    Estrutura:
+    "paths": {
+        "/produtos": {
+            "get": {
+                "summary": "Obter produtos"
+            }
+        }
+    }
+
+2. Melhorias no JSON Schema:
+    - Uso de regex para obrigar o preenchimento de campos do tipo string obrigatórios
+    - Formatação de campos de data, hora, email
+    - Valor de minimo e maximo para inteiros
+    - Quantidade minima que um array deve suportar

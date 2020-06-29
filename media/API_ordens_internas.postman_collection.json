@@ -1,0 +1,1678 @@
+{
+    "info": {
+        "name": "API ordens internas",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Ordens internas",
+            "item": [
+                {
+                    "name": "Cria uma nova ordem interna",
+                    "item": [
+                        {
+                            "name": "201 (Ordem interna criada)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 201;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'codigoOrdemInterna': {'type': 'string', 'example': '99999'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (sem codigoCliente)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (codigoCliente tipagem inválida)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": 10,\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (codigoCliente vazio)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (sem codigoOrdemInterna)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (codigoOrdemInterna tipagem inválida)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": 10,\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (codigoOrdemInterna vazio)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (sem tipoOrdem)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (tipoOrdem tipagem inválida)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": 10,\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (tipoOrdem vazio)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (sem areaControleCusto)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (areaControleCusto tipagem inválida)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": 10,\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (areaControleCusto vazio)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (sem razaoSocial)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (razaoSocial tipagem inválida)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": 10,\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (razaoSocial vazio)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (sem codigoEmpresa)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (codigoEmpresa tipagem inválida)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": 10,\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (codigoEmpresa vazio)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (sem codigoCentro)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (codigoCentro tipagem inválida)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": 10,\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (codigoCentro vazio)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (sem codigoCentroLucro)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (codigoCentroLucro tipagem inválida)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": 10,\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (codigoCentroLucro vazio)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (sem codigoCentroCustoResp)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (codigoCentroCustoResp tipagem inválida)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": 10\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "400 (codigoCentroCustoResp vazio)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 400;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "401 (sem client_id)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 401;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "401 (sem access_token)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 401;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "403 (A aplicação solicitante não pode realizar essa requisição)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 403;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "500 (Erro interno de servidor)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 500;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "502 (A aplicação não pôde atender ao pedido. Tentar novamente posteriomente)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 502;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "504 (Tempo de resposta excedido. Tentar novamente posteriormente)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 504;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'mensagem': {'type': 'string', 'example': 'detalhes do erro'}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"codigoCliente\": \"string\",\n    \"codigoOrdemInterna\": \"string\",\n    \"tipoOrdem\": \"string\",\n    \"areaControleCusto\": \"string\",\n    \"razaoSocial\": \"string\",\n    \"codigoEmpresa\": \"string\",\n    \"codigoCentro\": \"string\",\n    \"codigoCentroLucro\": \"string\",\n    \"codigoCentroCustoResp\": \"string\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{ ambiente }}//ordens-internas",
+                                    "host": [
+                                        "{{ ambiente }}"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "ordens-internas"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ],
+                    "protocolProfileBehavior": {},
+                    "_postman_isSubFolder": true
+                }
+            ],
+            "protocolProfileBehavior": {},
+            "_postman_isSubFolder": true
+        }
+    ]
+}

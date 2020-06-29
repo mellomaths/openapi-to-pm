@@ -1,0 +1,696 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Instalações",
+    "description": "API de instalações Supergasbras",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api-supergasbras.sensedia.com/sb/ecc/instalacoes/v1",
+      "description": "Sandbox"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/dev/ecc/instalacoes/v1",
+      "description": "Desenvolvimento"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/hml/ecc/instalacoes/v1",
+      "description": "Homologação"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/ecc/instalacoes/v1",
+      "description": "Produção"
+    }
+  ],
+  "paths": {
+    "/instalacoes/abastecimentos": {
+      "get": {
+        "description": "Retorna o perfil de abastecimento do cliente.",
+        "tags": [
+          "Instalações"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "description": "Identificador do Cliente.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "codigoSilo",
+            "required": false,
+            "description": "Codigo do Silo.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_listasilos"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/instalacoes/{id}/silos": {
+      "patch": {
+        "description": "Alteração de dados do silo.",
+        "tags": [
+          "Instalações"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identificador do silo.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/_silos"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created"
+          },
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/instalacoes/tanques": {
+      "post": {
+        "description": "Inclusão do nível de tanque.",
+        "tags": [
+          "Instalações"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/_niveltanque"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "_silos": {
+        "type": "object",
+        "required": [
+          "codigoCliente",
+          "capacidadeMaxima"
+        ],
+        "properties": {
+          "codigoCliente": {
+            "type": "string",
+            "description": "Identificador do cliente."
+          },
+          "capacidadeMaxima": {
+            "type": "number",
+            "description": "Capacidade máxima do silo."
+          }
+        }
+      },
+      "_niveltanque": {
+        "type": "object",
+        "required": [
+          "codigoCliente"
+        ],
+        "properties": {
+          "codigoCliente": {
+            "type": "string",
+            "description": "Identificador do cliente."
+          },
+          "tanques": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/_itemTanque"
+            }
+          }
+        }
+      },
+      "_itemTanque": {
+        "type": "object",
+        "required": [
+          "tipoDeterminacaoEstoque",
+          "dataEntradaEstoque",
+          "horaEntradaEstoque"
+        ],
+        "properties": {
+          "nomeSilo": {
+            "type": "string",
+            "description": "Nome do Silo."
+          },
+          "numeroCOA": {
+            "type": "string",
+            "description": "Número do Silo."
+          },
+          "tipoDeterminacaoEstoque": {
+            "type": "string",
+            "description": "Tipo de Determinação do Estoque."
+          },
+          "dataEntradaEstoque": {
+            "type": "string",
+            "description": "Data de Entrada no Estoque."
+          },
+          "horaEntradaEstoque": {
+            "type": "string",
+            "description": "Hora de Entrada no Estoque."
+          },
+          "qtdEmPorcentagem": {
+            "type": "number",
+            "description": "Quantidade em Porcentagem no Estoque."
+          },
+          "qtdEmValor": {
+            "type": "number",
+            "description": "Quantidade em Valor no Estoque."
+          }
+        }
+      },
+      "_listasilos": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/_silo"
+        }
+      },
+      "_silo": {
+        "type": "object",
+        "properties": {
+          "codigoCliente": {
+            "type": "string",
+            "description": "Código do Cliente."
+          },
+          "codigoSilo": {
+            "type": "string",
+            "description": "Código do Silo."
+          },
+          "nomeSilo": {
+            "type": "string",
+            "description": "Nome do Silo."
+          },
+          "percentualEstimado": {
+            "type": "number",
+            "description": "Percentual Estimado."
+          },
+          "proximoAbastecimento": {
+            "type": "string",
+            "description": "Data do próximo abastecimento."
+          },
+          "ultimoAbastecimento": {
+            "type": "string",
+            "description": "Data do último abastecimento."
+          },
+          "origemPrevisao": {
+            "type": "string"
+          },
+          "capacidadeTotal": {
+            "type": "number",
+            "description": "Capacidade Total dos Tanques, média em volumes."
+          },
+          "qtdTanque": {
+            "type": "number",
+            "description": "Quantidade de Tanque."
+          },
+          "ativo": {
+            "type": "string",
+            "description": "Status do Silo."
+          },
+          "dataCriacao": {
+            "type": "string",
+            "description": "Data de Criação."
+          },
+          "dataDesativacao": {
+            "type": "string",
+            "description": "Data de Desativação."
+          },
+          "dataOrdemDespachada": {
+            "type": "string",
+            "description": "Data da Ordem de Venda que está em DCR."
+          },
+          "statusOrdemDespachada": {
+            "type": "string",
+            "description": "Status da Ordem de Venda que está em DCR."
+          },
+          "numeroOrdemDespachada": {
+            "type": "string",
+            "description": "Número da Ordem de Venda que está em DCR."
+          },
+          "qtdVendidaDespachada": {
+            "type": "number",
+            "description": "Quantidade em KG do que foi vendida para Ordem de Venda em DCR."
+          },
+          "valorVendaDespachada": {
+            "type": "number",
+            "description": "Valor em reais (R$) da Ordem de venda em DCR."
+          },
+          "dataOrdemAberto": {
+            "type": "string",
+            "description": "Data da ultima Ordem de venda  que esta em aberto para o cliente."
+          },
+          "statusOrdemAberto": {
+            "type": "string",
+            "description": "Status da ultima Ordem de venda que está em aberto para o cliente."
+          },
+          "numeroOrdemAberto": {
+            "type": "string",
+            "description": "Número da ordem em aberto."
+          },
+          "qtdVendida": {
+            "type": "number",
+            "description": "Valor em reais (R$) da ultima Ordem de venda em aberto."
+          },
+          "valorVenda": {
+            "type": "number",
+            "description": "Valor em reais (R$) da ultima Ordem de venda em aberto."
+          },
+          "horarioCorteOrdem": {
+            "type": "string",
+            "description": "Informa o horário de corte da região do cliente para a realização de pedido."
+          },
+          "dataInicioDCR": {
+            "type": "string",
+            "description": "Informa a data de início a viagem."
+          },
+          "duracaoDaViagem": {
+            "type": "string",
+            "description": "Duração da viagem na área do cliente."
+          },
+          "bloqueadoParaEntrega": {
+            "type": "integer",
+            "description": "Status do silo (Desbloqueado “1” /Bloqueado “0” )"
+          },
+          "statusFinanceiroDaOrdem": {
+            "type": "string",
+            "description": "Status da ordem visão financeira."
+          },
+          "dataIdealCalculada": {
+            "type": "string",
+            "description": "Data Ideal Calculada do abastecimento."
+          },
+          "dataIdealCorrigida": {
+            "type": "string",
+            "description": "Data Ideal Corrigida do abastecimento."
+          },
+          "dataViagem1": {
+            "type": "string",
+            "description": "1° Data de Viagem."
+          },
+          "dataViagem2": {
+            "type": "string",
+            "description": "2° Data de Viagem."
+          },
+          "dataViagem3": {
+            "type": "string",
+            "description": "3° Data de Viagem."
+          },
+          "descricaoSilo": {
+            "type": "string",
+            "description": "Texto de descrição do Silo."
+          },
+          "nivelMaximo": {
+            "type": "number",
+            "description": "Nível Máximo do Tanque em porcentagem."
+          },
+          "nivelMinimo": {
+            "type": "number",
+            "description": "Nível Mínimo do Tanque em porcentagem."
+          },
+          "consumoAnual": {
+            "type": "number",
+            "description": "Consumo Anual do Cliente."
+          }
+        }
+      },
+      "_erro": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "tipo": {
+              "type": "string",
+              "description": "Tipo do erro."
+            },
+            "descricao": {
+              "type": "string",
+              "description": "Descrição do erro."
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,425 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Gestão de Produtos Laboratório",
+    "description": "API para gestão de produtos no laboratório.",
+    "version": "1.0.0",
+    "termsOfService": "http://swagger.io/terms/"
+  },
+  "servers": [
+    {
+      "url": "https://api.essilor.com.br/sandbox/gestao-produtos-laboratorio/v1",
+      "description": "Sandbox"
+    },
+    {
+      "url": "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1",
+      "description": "Desenvolvimento"
+    },
+    {
+      "url": "https://api.essilor.com.br/gestao-produtos-laboratorio/v1",
+      "description": "Produção"
+    }
+  ],
+  "paths": {
+    "/produtos": {
+      "get": {
+        "security": [
+          {
+            "OAuth2": []
+          }
+        ],
+        "tags": [
+          "produto"
+        ],
+        "description": "Operação para listagem de linhas de produtos.",
+        "parameters": [
+          {
+            "name": "laboratorio",
+            "in": "header",
+            "required": true,
+            "description": "CNPJ do laboratório.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "tipo",
+            "in": "query",
+            "required": true,
+            "description": "Tipo do Produto.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "SURFACAGEM_DIGITAL",
+                "SURFACAGEM_TRADICIONAL",
+                "LENTE_PRONTA"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de linhas de produtos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/produtos"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Critério para consulta de produto com formatação inválida.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erros"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erros"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Não autorizado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erros"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erros"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Time out.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/erros"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/{id}/parametros": {
+      "post": {
+        "security": [
+          {
+            "OAuth2": []
+          }
+        ],
+        "tags": [
+          "produto"
+        ],
+        "description": "Operação para retornar informações dos parâmetros e serviços compatíveis de uma linha de produto.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Código da Linha do Produto.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/parametro"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Parametro localizado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/parametro"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "OAuth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://api.essilor.com.br/oauth/grant-code",
+            "tokenUrl": "https://api.essilor.com.br/oauth/access-token"
+          }
+        }
+      }
+    },
+    "schemas": {
+      "produtos": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/produto"
+        }
+      },
+      "produto": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Código da Linha do Produto."
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição da Linha do Produto."
+          }
+        },
+        "required": [
+          "codigo",
+          "descricao"
+        ]
+      },
+      "parametro": {
+        "type": "object",
+        "properties": {
+          "servicos": {
+            "$ref": "#/components/schemas/servicos"
+          },
+          "receita": {
+            "$ref": "#/components/schemas/receita"
+          },
+          "armacao": {
+            "$ref": "#/components/schemas/armacao"
+          },
+          "dnpPerto": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "distanciaVertice": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "cro": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "anguloPantoscopico": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "anguloCurvatura": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "distanciaLeitura": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "coeficienteHE": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "coeficienteST": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "distanciaProgressao": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "olhoDominante": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "cvp": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "vmap": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "iniciaisPaciente": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          }
+        },
+        "required": [
+          "servicos",
+          "receita",
+          "armacao",
+          "dnpPerto",
+          "distanciaVertice",
+          "cro",
+          "anguloPantoscopico",
+          "anguloCurvatura",
+          "distanciaLeitura",
+          "coeficienteHE",
+          "coeficienteST",
+          "distanciaProgressao",
+          "olhoDominante",
+          "cvp",
+          "vmap",
+          "iniciaisPaciente"
+        ]
+      },
+      "servicos": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/servico"
+        }
+      },
+      "servico": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Código do serviço compatível."
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição  do serviço compatível."
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "ANTIRREFLEXO",
+              "COLORAÇÃO",
+              "MONTAGEM"
+            ],
+            "description": "Tipo do  do serviço compatível."
+          }
+        },
+        "required": [
+          "codigo",
+          "descricao",
+          "tipo"
+        ]
+      },
+      "receita": {
+        "type": "object",
+        "properties": {
+          "adicao": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "dnp": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "altura": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          }
+        },
+        "required": [
+          "adicao",
+          "dnp",
+          "altura"
+        ]
+      },
+      "armacao": {
+        "type": "object",
+        "properties": {
+          "vertical": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "horizontal": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "ponte": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "diametroMaior": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "modelo": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          },
+          "diametroMontagem": {
+            "$ref": "#/components/schemas/informacaoParametro"
+          }
+        },
+        "required": [
+          "vertical",
+          "horizontal",
+          "ponte",
+          "diametroMaior",
+          "tipo",
+          "modelo",
+          "diametroMontagem"
+        ]
+      },
+      "informacaoParametro": {
+        "type": "object",
+        "properties": {
+          "preenchimento": {
+            "type": "string",
+            "enum": [
+              "NAO_ACEITA",
+              "OPCIONAL",
+              "OBRIGATORIO"
+            ],
+            "description": "Informação se o parametro é obrigatório."
+          },
+          "dominio": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/dominioParametro"
+            }
+          }
+        },
+        "required": [
+          "preenchimento"
+        ]
+      },
+      "dominioParametro": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Código do domínio para o parametro."
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição do domínio para o parametro."
+          }
+        },
+        "required": [
+          "codigo",
+          "descricao"
+        ]
+      },
+      "erros": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/erro"
+        }
+      },
+      "erro": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Código da mensagem."
+          },
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem informativa."
+          }
+        }
+      }
+    }
+  }
+}

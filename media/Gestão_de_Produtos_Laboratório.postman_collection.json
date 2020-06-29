@@ -1,0 +1,328 @@
+{
+    "info": {
+        "name": "Gestão de Produtos Laboratório",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "produto",
+            "item": [
+                {
+                    "name": "Operação para listagem de linhas de produtos.",
+                    "item": [
+                        {
+                            "name": "200 (Lista de linhas de produtos.)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 200;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'array', 'items': {'type': 'object', 'properties': {'codigo': {'type': 'string', 'description': 'Código da Linha do Produto.'}, 'descricao': {'type': 'string', 'description': 'Descrição da Linha do Produto.'}}, 'required': ['codigo', 'descricao']}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{}"
+                                },
+                                "url": {
+                                    "raw": "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1//produtos",
+                                    "host": [
+                                        "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "produtos"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "401 (sem client_id)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 401;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'array', 'items': {'type': 'object', 'properties': {'codigo': {'type': 'string', 'description': 'Código da mensagem.'}, 'mensagem': {'type': 'string', 'description': 'Mensagem informativa.'}}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{}"
+                                },
+                                "url": {
+                                    "raw": "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1//produtos",
+                                    "host": [
+                                        "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "produtos"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "401 (sem access_token)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 401;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'array', 'items': {'type': 'object', 'properties': {'codigo': {'type': 'string', 'description': 'Código da mensagem.'}, 'mensagem': {'type': 'string', 'description': 'Mensagem informativa.'}}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{}"
+                                },
+                                "url": {
+                                    "raw": "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1//produtos",
+                                    "host": [
+                                        "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "produtos"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "403 (Não autorizado.)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 403;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'array', 'items': {'type': 'object', 'properties': {'codigo': {'type': 'string', 'description': 'Código da mensagem.'}, 'mensagem': {'type': 'string', 'description': 'Mensagem informativa.'}}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{}"
+                                },
+                                "url": {
+                                    "raw": "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1//produtos",
+                                    "host": [
+                                        "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "produtos"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "500 (Erro interno.)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 500;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'array', 'items': {'type': 'object', 'properties': {'codigo': {'type': 'string', 'description': 'Código da mensagem.'}, 'mensagem': {'type': 'string', 'description': 'Mensagem informativa.'}}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{}"
+                                },
+                                "url": {
+                                    "raw": "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1//produtos",
+                                    "host": [
+                                        "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "produtos"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "504 (Time out.)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 504;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'array', 'items': {'type': 'object', 'properties': {'codigo': {'type': 'string', 'description': 'Código da mensagem.'}, 'mensagem': {'type': 'string', 'description': 'Mensagem informativa.'}}}};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{}"
+                                },
+                                "url": {
+                                    "raw": "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1//produtos",
+                                    "host": [
+                                        "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "produtos"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ],
+                    "protocolProfileBehavior": {},
+                    "_postman_isSubFolder": true
+                },
+                {
+                    "name": "Operação para retornar informações dos parâmetros e serviços compatíveis de uma linha de produto.",
+                    "item": [
+                        {
+                            "name": "200 (Parametro localizado.)",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "const statusCodeExpected = 200;\n\npm.test('Status code is ' + statusCodeExpected, function() {\n  pm.response.to.have.status(statusCodeExpected);\n});\n\npm.test('Header Content-Type definido', function() {\n  pm.response.to.have.header('Content-Type');\n});\n\npm.test('Content-Type igual a application/json', function() {\n  const headers = pm.response.headers.all();\n\n  for (let i = 0; i < headers.length; i++) {\n    const head = headers[i];\n    if (head.key === 'Content-Type') {\n      pm.expect(head.value).to.include('application/json');\n    }\n  }\n});\n\nconst jsonResponseBody = pm.response.json();\n\nconst jsonSchema = {'type': 'object', 'properties': {'servicos': {'type': 'array', 'items': {'type': 'object', 'properties': {'codigo': {'type': 'string', 'description': 'Código do serviço compatível.'}, 'descricao': {'type': 'string', 'description': 'Descrição  do serviço compatível.'}, 'tipo': {'type': 'string', 'enum': ['ANTIRREFLEXO', 'COLORAÇÃO', 'MONTAGEM'], 'description': 'Tipo do  do serviço compatível.'}}, 'required': ['codigo', 'descricao', 'tipo']}}, 'receita': {'type': 'object', 'properties': {'adicao': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'dnp': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'altura': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}}, 'required': ['adicao', 'dnp', 'altura']}, 'armacao': {'type': 'object', 'properties': {'vertical': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'horizontal': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'ponte': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'diametroMaior': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'tipo': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'modelo': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'diametroMontagem': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}}, 'required': ['vertical', 'horizontal', 'ponte', 'diametroMaior', 'tipo', 'modelo', 'diametroMontagem']}, 'dnpPerto': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'distanciaVertice': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'cro': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'anguloPantoscopico': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'anguloCurvatura': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'distanciaLeitura': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'coeficienteHE': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'coeficienteST': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'distanciaProgressao': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'olhoDominante': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'cvp': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'vmap': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}, 'iniciaisPaciente': {'type': 'object', 'properties': {'preenchimento': {'type': 'string', 'enum': ['NAO_ACEITA', 'OPCIONAL', 'OBRIGATORIO'], 'description': 'Informação se o parametro é obrigatório.'}, 'dominio': {'type': 'array', 'items': {'$ref': '#/components/schemas/dominioParametro'}}}, 'required': ['preenchimento']}}, 'required': ['servicos', 'receita', 'armacao', 'dnpPerto', 'distanciaVertice', 'cro', 'anguloPantoscopico', 'anguloCurvatura', 'distanciaLeitura', 'coeficienteHE', 'coeficienteST', 'distanciaProgressao', 'olhoDominante', 'cvp', 'vmap', 'iniciaisPaciente']};\n\npm.test('JSON Schema validado', function() {\n  pm.expect(tv4.validate(jsonResponseBody, jsonSchema)).to.be.true;\n});\n"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "client_id",
+                                        "type": "text",
+                                        "value": "{{client_id}}"
+                                    },
+                                    {
+                                        "key": "access_token",
+                                        "type": "text",
+                                        "value": "{{access_token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"servicos\": [\n        {\n            \"codigo\": \"string\",\n            \"descricao\": \"string\",\n            \"tipo\": \"string\"\n        }\n    ],\n    \"receita\": {\n        \"adicao\": {\n            \"preenchimento\": \"string\",\n            \"dominio\": [\n                {\n                    \"codigo\": \"string\",\n                    \"descricao\": \"string\"\n                }\n            ]\n        },\n        \"dnp\": {\n            \"preenchimento\": \"string\",\n            \"dominio\": [\n                {\n                    \"codigo\": \"string\",\n                    \"descricao\": \"string\"\n                }\n            ]\n        },\n        \"altura\": {\n            \"preenchimento\": \"string\",\n            \"dominio\": [\n                {\n                    \"codigo\": \"string\",\n                    \"descricao\": \"string\"\n                }\n            ]\n        }\n    },\n    \"armacao\": {\n        \"vertical\": {\n            \"preenchimento\": \"string\",\n            \"dominio\": [\n                {\n                    \"codigo\": \"string\",\n                    \"descricao\": \"string\"\n                }\n            ]\n        },\n        \"horizontal\": {\n            \"preenchimento\": \"string\",\n            \"dominio\": [\n                {\n                    \"codigo\": \"string\",\n                    \"descricao\": \"string\"\n                }\n            ]\n        },\n        \"ponte\": {\n            \"preenchimento\": \"string\",\n            \"dominio\": [\n                {\n                    \"codigo\": \"string\",\n                    \"descricao\": \"string\"\n                }\n            ]\n        },\n        \"diametroMaior\": {\n            \"preenchimento\": \"string\",\n            \"dominio\": [\n                {\n                    \"codigo\": \"string\",\n                    \"descricao\": \"string\"\n                }\n            ]\n        },\n        \"tipo\": {\n            \"preenchimento\": \"string\",\n            \"dominio\": [\n                {\n                    \"codigo\": \"string\",\n                    \"descricao\": \"string\"\n                }\n            ]\n        },\n        \"modelo\": {\n            \"preenchimento\": \"string\",\n            \"dominio\": [\n                {\n                    \"codigo\": \"string\",\n                    \"descricao\": \"string\"\n                }\n            ]\n        },\n        \"diametroMontagem\": {\n            \"preenchimento\": \"string\",\n            \"dominio\": [\n                {\n                    \"codigo\": \"string\",\n                    \"descricao\": \"string\"\n                }\n            ]\n        }\n    },\n    \"dnpPerto\": {\n        \"preenchimento\": \"string\",\n        \"dominio\": [\n            {\n                \"codigo\": \"string\",\n                \"descricao\": \"string\"\n            }\n        ]\n    },\n    \"distanciaVertice\": {\n        \"preenchimento\": \"string\",\n        \"dominio\": [\n            {\n                \"codigo\": \"string\",\n                \"descricao\": \"string\"\n            }\n        ]\n    },\n    \"cro\": {\n        \"preenchimento\": \"string\",\n        \"dominio\": [\n            {\n                \"codigo\": \"string\",\n                \"descricao\": \"string\"\n            }\n        ]\n    },\n    \"anguloPantoscopico\": {\n        \"preenchimento\": \"string\",\n        \"dominio\": [\n            {\n                \"codigo\": \"string\",\n                \"descricao\": \"string\"\n            }\n        ]\n    },\n    \"anguloCurvatura\": {\n        \"preenchimento\": \"string\",\n        \"dominio\": [\n            {\n                \"codigo\": \"string\",\n                \"descricao\": \"string\"\n            }\n        ]\n    },\n    \"distanciaLeitura\": {\n        \"preenchimento\": \"string\",\n        \"dominio\": [\n            {\n                \"codigo\": \"string\",\n                \"descricao\": \"string\"\n            }\n        ]\n    },\n    \"coeficienteHE\": {\n        \"preenchimento\": \"string\",\n        \"dominio\": [\n            {\n                \"codigo\": \"string\",\n                \"descricao\": \"string\"\n            }\n        ]\n    },\n    \"coeficienteST\": {\n        \"preenchimento\": \"string\",\n        \"dominio\": [\n            {\n                \"codigo\": \"string\",\n                \"descricao\": \"string\"\n            }\n        ]\n    },\n    \"distanciaProgressao\": {\n        \"preenchimento\": \"string\",\n        \"dominio\": [\n            {\n                \"codigo\": \"string\",\n                \"descricao\": \"string\"\n            }\n        ]\n    },\n    \"olhoDominante\": {\n        \"preenchimento\": \"string\",\n        \"dominio\": [\n            {\n                \"codigo\": \"string\",\n                \"descricao\": \"string\"\n            }\n        ]\n    },\n    \"cvp\": {\n        \"preenchimento\": \"string\",\n        \"dominio\": [\n            {\n                \"codigo\": \"string\",\n                \"descricao\": \"string\"\n            }\n        ]\n    },\n    \"vmap\": {\n        \"preenchimento\": \"string\",\n        \"dominio\": [\n            {\n                \"codigo\": \"string\",\n                \"descricao\": \"string\"\n            }\n        ]\n    },\n    \"iniciaisPaciente\": {\n        \"preenchimento\": \"string\",\n        \"dominio\": [\n            {\n                \"codigo\": \"string\",\n                \"descricao\": \"string\"\n            }\n        ]\n    }\n}"
+                                },
+                                "url": {
+                                    "raw": "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1//produtos/{id}/parametros",
+                                    "host": [
+                                        "https://api.essilor.com.br/dev/gestao-produtos-laboratorio/v1"
+                                    ],
+                                    "path": [
+                                        "",
+                                        "produtos",
+                                        "{id}",
+                                        "parametros"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ],
+                    "protocolProfileBehavior": {},
+                    "_postman_isSubFolder": true
+                }
+            ],
+            "protocolProfileBehavior": {},
+            "_postman_isSubFolder": true
+        }
+    ]
+}

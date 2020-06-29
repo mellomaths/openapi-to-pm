@@ -1,0 +1,7 @@
+1. Fazer bad requests para query parameters
+
+2. Gerar mais testes baseado no JSON Schema
+    - Enum
+    - Regex pattern de string
+    - Minimo e maximo de inteiros
+    - Quantidade minima e maxima de objetos num array

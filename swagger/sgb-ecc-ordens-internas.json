@@ -1,0 +1,225 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "API que permite que as revendedoras de gás registrem suas ordens internas.",
+    "version": "1.0.0",
+    "title": "API ordens internas",
+    "termsOfService": ""
+  },
+  "paths": {
+    "/ordens-internas": {
+      "post": {
+        "tags": [
+          "Ordens internas"
+        ],
+        "summary": "Cria uma nova ordem interna",
+        "description": "",
+        "operationId": "createInternalOrder",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "Identificador de autorização recuperado pelo processo OAuth 2.0.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdemInterna"
+              }
+            }
+          },
+          "description": "Dados da ordem interna que deve ser registrada",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Ordem interna criada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaDeSucesso"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição inválida. Todos os campos são obrigatórios",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaDeErro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Requisição não autorizada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaDeErro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "A aplicação solicitante não pode realizar essa requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaDeErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno de servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaDeErro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "A aplicação não pôde atender ao pedido. Tentar novamente posteriomente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaDeErro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Tempo de resposta excedido. Tentar novamente posteriormente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaDeErro"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api-supergasbras.sensedia.com/sb/ordem-interna/v1",
+      "description": "Sandbox"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/dev/ordem-interna/v1",
+      "description": "Desenvolvimento"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/hml/ordem-interna/v1",
+      "description": "Homologação"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/ordem-interna/v1",
+      "description": "Produção"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "OrdemInterna": {
+        "type": "object",
+        "required": [
+          "codigoCliente",
+          "codigoOrdemInterna",
+          "tipoOrdem",
+          "areaControleCusto",
+          "razaoSocial",
+          "codigoEmpresa",
+          "codigoCentro",
+          "codigoCentroLucro",
+          "codigoCentroCustoResp"
+        ],
+        "properties": {
+          "codigoCliente": {
+            "type": "string",
+            "example": "317217",
+            "description": "Código do cliente"
+          },
+          "codigoOrdemInterna": {
+            "type": "string",
+            "example": "718217",
+            "description": "Código da ordem interna"
+          },
+          "tipoOrdem": {
+            "type": "string",
+            "example": "VENDA",
+            "description": "Tipo da ordem interna"
+          },
+          "areaControleCusto": {
+            "type": "string",
+            "example": "vendas",
+            "description": "Área de controle de custo"
+          },
+          "razaoSocial": {
+            "type": "string",
+            "example": "Revendedora de gás LTDA",
+            "description": "Razão social do cliente"
+          },
+          "codigoEmpresa": {
+            "type": "string",
+            "example": "012831",
+            "description": "Código da empresa"
+          },
+          "codigoCentro": {
+            "type": "string",
+            "example": "641255",
+            "description": "Código do centro"
+          },
+          "codigoCentroLucro": {
+            "type": "string",
+            "example": "102946",
+            "description": "Código do centro de lucro"
+          },
+          "codigoCentroCustoResp": {
+            "type": "string",
+            "example": "819284",
+            "description": "Código do centro de custo responsável"
+          }
+        }
+      },
+      "RespostaDeSucesso": {
+        "type": "object",
+        "properties": {
+          "codigoOrdemInterna": {
+            "type": "string",
+            "example": "99999"
+          }
+        }
+      },
+      "RespostaDeErro": {
+        "type": "object",
+        "properties": {
+          "mensagem": {
+            "type": "string",
+            "example": "detalhes do erro"
+          }
+        }
+      }
+    }
+  }
+}

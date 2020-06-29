@@ -1,0 +1,557 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Essa API será para suportar a solução de Instalação da Supergasbras, com integrações com o SAP, atendendo os requisitos de associa equipamento a uma Instalação SGI",
+    "version": "1.0.0",
+    "title": "API Instalações CCS",
+    "contact": {
+      "email": "suporte@supergasbras.com.br"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api-supergasbras.sensedia.com/sb/ccs/instalacoes/v1"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/dev/ccs/instalacoes/v1"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/hml/ccs/instalacoes/v1"
+    },
+    {
+      "url": "https://api-supergasbras.sensedia.com/ccs/instalacoes/v1"
+    }
+  ],
+  "paths": {
+    "/instalacoesSgi/{codigoInstalacao}": {
+      "put": {
+        "summary": "Atualziação de uma determinada ordem de serviço",
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "tags": [
+          "Instalação SGI"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "Identificador de autorização recuperado pelo processo OAuth 2.0",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "codigoInstalacao",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 10
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InstalacaoSgiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Ordem de Serviço alterada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstalacaoSgiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Solicitação incorreta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Requisição não autorizada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Sem permissão.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dados informados não encontrado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Não foi possível atualizar por algum erro de negócio.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao processar a solicitação no servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Servidor encontrou um erro e não pode completar a solicitação.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Não foi possível completar a solicitação.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/instalacoesSgi": {
+      "get": {
+        "summary": "lista de instalações de um determinado Cliente (Parceiro de Negócio)",
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "tags": [
+          "Instalação SGI"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "client_id",
+            "description": "Identificador do App cadastrado no portal.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "access_token",
+            "description": "Identificador de autorização recuperado pelo processo OAuth 2.0",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "idParceiroNegocio",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Identificador do Parceiro de Negócio."
+          },
+          {
+            "in": "query",
+            "name": "numeroDocumento",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Numero do documento do cliente (CPF ou CNPJ)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Instalacoes"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Solicitação incorreta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Requisição não autorizada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Sem permissão.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dados informados não encontrado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Não foi possível atualizar por algum erro de negócio.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao processar a solicitação no servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Servidor encontrou um erro e não pode completar a solicitação.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Não foi possível completar a solicitação.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "oAuth2": {
+        "type": "oauth2",
+        "description": "For more information, see https://developers.getbase.com/docs/rest/articles/oauth2/requests",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://api.getbase.com/oauth2/authorize",
+            "tokenUrl": "https://api.example.com/oauth/token",
+            "scopes": {
+              "read": "Grant read-only access to all your data except for the account and user info",
+              "write": "Grant write-only access to all your data except for the account and user info",
+              "profile": "Grant read-only access to the account and user info only"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Condominio": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "maxLength": 30,
+            "description": "Código do Condomínio"
+          },
+          "nome": {
+            "type": "string",
+            "maxLength": 40,
+            "description": "Nome do Condomínio"
+          }
+        }
+      },
+      "InstalacaoSgiRequest": {
+        "type": "object",
+        "required": [
+          "numeroNota",
+          "localInstalacao",
+          "acao",
+          "leituraMedidor",
+          "dataMontagemDesmontagem",
+          "horaMontagemDesmontagem",
+          "Equipamento"
+        ],
+        "properties": {
+          "numeroNota": {
+            "type": "string",
+            "maxLength": 12
+          },
+          "localInstalacao": {
+            "type": "string",
+            "maxLength": 30
+          },
+          "acao": {
+            "type": "string",
+            "enum": [
+              "M",
+              "D"
+            ],
+            "description": "<br>M - Montagem <br>D - Desmontagem"
+          },
+          "leitura": {
+            "type": "number",
+            "format": "decimal",
+            "maxLength": 23
+          },
+          "dataExecucao": {
+            "type": "string",
+            "format": "date"
+          },
+          "horaExecucao": {
+            "type": "string",
+            "format": "partial-time",
+            "description": "hh:mm:ss"
+          },
+          "Equipamento": {
+            "type": "object",
+            "required": [
+              "codigoEquipamento",
+              "numeroSerie",
+              "numeroPorta",
+              "numeroPortaValvula"
+            ],
+            "properties": {
+              "codigoEquipamento": {
+                "type": "string",
+                "maxLength": 18
+              },
+              "numeroSerie": {
+                "type": "string",
+                "maxLength": 18
+              },
+              "numeroPorta": {
+                "type": "string",
+                "maximum": 2
+              },
+              "numeroPortaValvula": {
+                "type": "string",
+                "maximum": 2
+              }
+            }
+          }
+        }
+      },
+      "InstalacaoSgiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "Sucesso",
+              "Insucesso"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "Condominio": {
+            "type": "object",
+            "properties": {
+              "codigo": {
+                "type": "string",
+                "maxLength": 30,
+                "description": "Código do Condomínio"
+              },
+              "nome": {
+                "type": "string",
+                "maxLength": 40,
+                "description": "Nome do Condomínio"
+              }
+            }
+          }
+        }
+      },
+      "Endereco": {
+        "type": "object",
+        "properties": {
+          "tipo": {
+            "type": "string",
+            "maxLength": 8,
+            "description": "Tipo de endereço",
+            "enum": [
+              "Consumo",
+              "Cobranca"
+            ]
+          },
+          "rua": {
+            "type": "string",
+            "maxLength": 60,
+            "description": "Logradouro"
+          },
+          "numero": {
+            "type": "string",
+            "maxLength": 10,
+            "description": "Numero do Logradouro"
+          },
+          "bairro": {
+            "type": "string",
+            "maxLength": 40,
+            "description": "Nome do bairro"
+          },
+          "cidade": {
+            "type": "string",
+            "maxLength": 40,
+            "description": "Nome do cidade"
+          },
+          "estado": {
+            "type": "string",
+            "maxLength": 3,
+            "description": "sigra do estado"
+          },
+          "cep": {
+            "type": "string",
+            "maxLength": 10,
+            "description": "numero do cep"
+          },
+          "bloco": {
+            "type": "string",
+            "maxLength": 10,
+            "description": "bloco do Logradouro"
+          },
+          "apartamento": {
+            "type": "string",
+            "maxLength": 10,
+            "description": "numero do apartamento"
+          },
+          "tipoInstalacao": {
+            "type": "string",
+            "enum": [
+              "COM",
+              "RES"
+            ],
+            "description": "Nota da Ordem de Serviço <br> COM = Comercial <br> RES = Residencial"
+          },
+          "apartamentoOcupado": {
+            "type": "boolean",
+            "description": "Se o apartamento esta ocupado."
+          }
+        }
+      },
+      "Instalacoes": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Instalacao"
+        }
+      },
+      "Instalacao": {
+        "type": "object",
+        "properties": {
+          "codigoInstalacao": {
+            "type": "string",
+            "maxLength": 10,
+            "description": "Código da Instalação"
+          },
+          "Condominio": {
+            "$ref": "#/components/schemas/Condominio"
+          },
+          "Enderecos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Endereco"
+            }
+          }
+        }
+      },
+      "Erro": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "tipo": {
+              "type": "string",
+              "description": "Status http de erro"
+            },
+            "descricao": {
+              "type": "string",
+              "description": "Mensagem descritiva do erro"
+            }
+          }
+        }
+      }
+    }
+  }
+}
