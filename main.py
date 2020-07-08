@@ -3,7 +3,8 @@ from typing import Optional
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from openapi.models import OpenApiSpecification
+from app.schemas.openapi import OpenApiSpecification
+from app.schemas.health import GetHealthResponse
 
 app = FastAPI()
 
@@ -16,7 +17,7 @@ app.add_middleware(
 )
 
 
-@app.get('/api/v1/health')
+@app.get('/api/v1/health', response_model=GetHealthResponse)
 def health_check():
     return {'ok': True, 'message': 'OpenAPI2Postman is up and running!'}
 
