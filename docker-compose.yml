@@ -1,0 +1,15 @@
+version: '2'
+services: 
+  api:
+    build: 
+      context: .
+    image: fastapi.openapi-to-postman
+    container_name: fastapi.openapi-to-postman
+    ports:
+      - "8000:80"
+    networks:
+      - api-network  
+
+networks:
+  api-network:
+    driver: bridge
