@@ -3,8 +3,8 @@ from typing import Optional
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.schemas.openapi import OpenApiSpecification
-from app.schemas.health import GetHealthResponse
+from schemas.openapi import OpenApiSpecification
+from schemas.health import GetHealthResponse
 
 app = FastAPI()
 
