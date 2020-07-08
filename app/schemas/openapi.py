@@ -10,4 +10,3 @@ class Info(BaseModel):
 class OpenApiSpecification(BaseModel):
     openapi: str
     info: Info
-
