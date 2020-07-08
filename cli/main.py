@@ -2,9 +2,9 @@ import os
 import sys
 import json
 
-from config import CommandLineConfig
-from exceptions import OpenApiVersionError, OpenApiFormatError, CustomException
-from tracer import Tracer
+from .config import CommandLineConfig
+from .exceptions import OpenApiVersionError, OpenApiFormatError, CustomException
+from .tracer import Tracer
 from postman.pm import Postman
 
 

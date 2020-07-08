@@ -5,8 +5,8 @@ import sys
 
 from .templates import create_request, create_request_name, generate_test_script, create_collection_name
 from openapi.openapi import OpenApi
-from exceptions import InvalidEnvironmentValueError
-from tracer import Tracer
+from cli.exceptions import InvalidEnvironmentValueError
+from cli.tracer import Tracer
 
 
 class Postman:
