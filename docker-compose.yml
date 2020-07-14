@@ -3,8 +3,8 @@ services:
   api:
     build: 
       context: .
-    image: fastapi.openapi-to-postman
-    container_name: fastapi.openapi-to-postman
+    image: openapi-to-postman
+    container_name: openapi-to-postman
     ports:
       - "8000:80"
     networks:
