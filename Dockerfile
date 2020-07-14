@@ -1,4 +1,6 @@
 FROM python:3.8-slim-buster as builder
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
 RUN pip install pipenv
 
@@ -19,8 +21,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-RUN chmod +x /usr/src/app/run.sh
+RUN chmod +x /usr/src/app/.docker/entrypoint.sh
 
-EXPOSE 80
-
-ENTRYPOINT [ "/usr/src/app/run.sh" ]
+ENTRYPOINT [ "/usr/src/app/.docker/entrypoint.sh" ]
