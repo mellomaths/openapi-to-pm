@@ -1,0 +1,6 @@
+build:
+  docker:
+    web: Dockerfile.production
+
+run:
+  web: "/usr/src/app/.docker/entrypoint.sh"
