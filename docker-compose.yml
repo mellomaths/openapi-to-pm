@@ -6,9 +6,11 @@ services:
     image: openapi-to-postman
     container_name: openapi-to-postman
     ports:
-      - "8000:80"
+      - "8000:8000"
     networks:
-      - api-network  
+      - api-network
+    environment: 
+      ENV: development
 
 networks:
   api-network:
