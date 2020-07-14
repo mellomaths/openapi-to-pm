@@ -3,6 +3,8 @@ from typing import Optional
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from starlette.responses import RedirectResponse
+
 from schemas.openapi import OpenApiSpecification
 from schemas.health import GetHealthResponse
 
@@ -15,6 +17,11 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*'],
 )
+
+
+@app.get('/')
+def home():
+    return RedirectResponse(url='/docs')
 
 
 @app.get('/api/v1/health', response_model=GetHealthResponse)
