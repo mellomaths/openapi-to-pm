@@ -10,6 +10,8 @@ env:
 before_install:
   - docker build -t ${IMAGE_NAME} .
   - docker run -d --publish 80:8000 --name=${CONTAINER_NAME} -e ENV='ci' ${IMAGE_NAME}
+
+install:
   - docker exec ${CONTAINER_NAME} /bin/bash -c "pip install pytest requests"
 
 script:
