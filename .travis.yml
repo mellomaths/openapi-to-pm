@@ -16,3 +16,9 @@ install:
 
 script:
   - docker exec ${CONTAINER_NAME} /bin/bash -c "pytest"
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
