@@ -3,8 +3,9 @@ services:
   - docker
 
 env:
-  - IMAGE_NAME="mellomaths/openapi-to-pm"
-  - CONTAINER_NAME="openapi-to-pm"
+  global:
+    - IMAGE_NAME="mellomaths/openapi-to-pm"
+    - CONTAINER_NAME="openapi-to-pm"
 
 before_install:
   - docker build -t ${IMAGE_NAME} .
