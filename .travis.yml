@@ -2,8 +2,14 @@ language: python
 services:
   - docker
 
+env:
+  - IMAGE_NAME="mellomaths/openapi-to-pm"
+  - CONTAINER_NAME="openapi-to-pm"
+
 before_install:
-  - ./.docker/start.sh
+  - docker build -t ${IMAGE_NAME} .
+  - docker run -d --publish 80:8000 --name=${CONTAINER_NAME} -e ENV='ci' ${IMAGE_NAME}
+  - docker exec ${CONTAINER_NAME} /bin/bash -c "pip install pytest requests"
 
 script:
-  - pytest
+  - docker exec ${CONTAINER_NAME} /bin/bash -c "pytest"
