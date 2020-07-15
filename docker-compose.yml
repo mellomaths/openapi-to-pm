@@ -3,7 +3,7 @@ services:
   api:
     build: 
       context: .
-    image: openapi-to-postman
+    image: "mellomaths/openapi-to-pm"
     container_name: openapi-to-postman
     ports:
       - "8000:8000"
