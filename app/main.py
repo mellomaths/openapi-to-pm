@@ -1,12 +1,10 @@
-from typing import Optional
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from starlette.responses import RedirectResponse
 
-from schemas.openapi import OpenApiSpecification
-from schemas.health import GetHealthResponse
+from .schemas.openapi import OpenApiSpecification
+from .schemas.health import GetHealthResponse
 
 app = FastAPI()
 
