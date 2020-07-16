@@ -17,8 +17,8 @@ install:
 script:
   - docker exec ${CONTAINER_NAME} /bin/bash -c "pytest"
 
-deploy:
-  provider: script
-  script: bash ./.docker/docker_push
-  on:
-    branch: master
+after_success:
+  - docker --version
+  - docker build -t ${IMAGE_NAME} .
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push ${IMAGE_NAME}
